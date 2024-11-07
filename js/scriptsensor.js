@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.vazao').innerText = vazao.toFixed(2) + ' L';
         document.querySelector('.vazaoM3').innerText = vazaoM3.toFixed(3) + ' m³'; // Atualizar a vazão em m³
 
-        // Garante que a caixa de resultado esteja visível
         document.getElementById('caixaResultado').style.display = 'block';
     
         // Atualiza o cronômetro
@@ -55,14 +54,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    consumo: parseFloat(consumo.toFixed(4)), // Corrigir formatação
-                    custo: parseFloat(custo.toFixed(2)), // Corrigir formatação
-                    tempo: parseFloat((tempoSegundos / 60).toFixed(2)), // Corrigir formatação
+                    consumo: parseFloat(consumo.toFixed(4)),
+                    custo: parseFloat(custo.toFixed(2)),
+                    tempo: parseFloat((tempoSegundos / 60).toFixed(2)),
                     potencia: potenciaSelecionada,
                     tensao: tensaoSelecionada,
                     estacao: estacaoSelecionada,
-                    vazao: parseFloat(vazao.toFixed(2)), // Corrigir formatação
-                    consumoM3: parseFloat((vazao / 1000).toFixed(3)) // Corrigir formatação
+                    vazao: parseFloat(vazao.toFixed(2)),
+                    consumoM3: parseFloat((vazao / 1000).toFixed(3))
                 })
             })
             .then(response => response.json())
@@ -447,7 +446,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para criar um novo banho
     function novoBanho() {
-        // Criar um novo banho na API
         fetch('https://6727d6c8270bd0b97553b20b.mockapi.io/chuveiro', {
             method: 'POST',
             headers: {

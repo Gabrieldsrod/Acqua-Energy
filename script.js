@@ -219,7 +219,6 @@ function mostrarTodosBanhos() {
         .catch(error => console.error('Erro ao carregar dados da API:', error));
 };
 
-// Removido para evitar duplicação de dados
 // Função para configurar os gráficos com Chart.js
 function configurarGraficos() {
     const ctxConsumo = document.getElementById('graficoConsumo').getContext('2d');
