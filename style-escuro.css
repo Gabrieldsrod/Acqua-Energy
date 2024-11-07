@@ -311,17 +311,29 @@ canvas {
     color: aliceblue;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
 }
 
 .totaisContainer h2 {
     margin-bottom: 20px;
 }
 
-.totaisContainer {
+.totaisContainer p {
     line-height: 50px;
 }
 
+.porcentContainer {
+    background-color: #2e2d2d;
+    box-shadow: 0 0 20px #374088;
+    padding: 20px;
+    border-radius: 0.5em;
+    margin-top: 20px;
+    font-family: "Archivo", sans-serif;
+    font-size: 18px;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* Estilo para o botão de alternância de tema */
 #toggleTheme {
     background-color: #404a99;
@@ -332,6 +344,7 @@ canvas {
     border-radius: 5px;
     font-size: 18px;
 }
+
 
 #toggleTheme:hover {
     background-color: #374088;
