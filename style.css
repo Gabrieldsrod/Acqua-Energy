@@ -41,6 +41,11 @@ h2 {
     color: #080c2c;
 }
 
+h3 {
+    font-family: "Archivo", sans-serif;
+    color: #080c2c;
+}
+
 header {
     width: 100%;
     background-color: #080c2c;

@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.querySelector('.totalEnergia').innerText = totalEnergia.toFixed(5) + ' kWh';
         document.querySelector('.totalCustoEnergia').innerText = 'R$ ' + totalCustoEnergia.toFixed(2);
-        document.querySelector('.totalTempoBanho').innerText = totalTempoBanho.toFixed(2) + ' minutos';
+        document.querySelector('.totalTempoBanho').innerText = totalTempoBanho + ' minutos';
         document.querySelector('.totalVazaoLitros').innerText = totalVazaoLitros.toFixed(2) + ' L';
         document.querySelector('.totalVazaoM3').innerText = (totalVazaoLitros / 1000).toFixed(3) + ' m³';
         document.querySelector('.totalCustoAgua').innerText = 'R$ ' + totalCustoAgua.toFixed(2);
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 document.querySelector('.totalEnergia').innerText = totalEnergia.toFixed(5) + ' kWh';
                 document.querySelector('.totalCustoEnergia').innerText = 'R$ ' + totalCustoEnergia.toFixed(2);
-                document.querySelector('.totalTempoBanho').innerText = totalTempoBanho.toFixed(2) + ' minutos';
+                document.querySelector('.totalTempoBanho').innerText = totalTempoBanho + ' minutos';
                 document.querySelector('.totalVazaoLitros').innerText = totalVazaoLitros.toFixed(2) + ' L';
                 document.querySelector('.totalVazaoM3').innerText = (totalVazaoLitros / 1000).toFixed(3) + ' m³';
                 document.querySelector('.totalCustoAgua').innerText = 'R$ ' + totalCustoAgua.toFixed(2);
