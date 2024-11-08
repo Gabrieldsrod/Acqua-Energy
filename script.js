@@ -39,16 +39,15 @@ function calcularConsumo() {
     isCalculating = true;
 
     const tempoMinutos = parseFloat(document.getElementById('tempo').value);
-    const agua = parseFloat(document.getElementById('agua').value);
 
-    if (isNaN(tempoMinutos) || tempoMinutos <= 0 || isNaN(agua) || agua <= 0) {
-        alert('Por favor, insira valores válidos para o tempo e a vazão.');
+    if (isNaN(tempoMinutos) || tempoMinutos <= 0) {
+        alert('Por favor, insira um valor válido para o tempo.');
         isCalculating = false;
         return;
     }
 
     const tempoHoras = tempoMinutos / 60; // Converter minutos para horas
-    const vazao = agua * 6 * tempoMinutos; // Calcular a vazão e multiplicar pelos minutos
+    const vazao = 12 * tempoMinutos; // Calcular a vazão multiplicando pelos minutos
 
     let potencia;
     if (tensaoSelecionada === '127V') {
