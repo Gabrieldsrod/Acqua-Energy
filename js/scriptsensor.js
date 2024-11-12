@@ -1,9 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const dropdowns = document.querySelectorAll('.dropdown'); // Adicionar a constante dropdowns
     // ...existing code...
 
     let tensaoSelecionada = '127V';
     let potenciaSelecionada = '4400W';
     let estacaoSelecionada = 'Verão';
+
+    // Função para atualizar as seleções
+    function atualizarSelecoes() {
+        tensaoSelecionada = document.querySelector('.selecioneTensao .select span').innerText;
+        potenciaSelecionada = document.querySelector('.selecionePotencia .select span').innerText;
+        estacaoSelecionada = document.querySelector('.selecioneEstacao .select span').innerText;
+    }
 
     let contadorBanho = 0;
     let ultimoId = 0;
@@ -28,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let totalCustoEsgoto = 0;
 
     function atualizarConsumo(tempoSegundos) {
+        atualizarSelecoes(); // Atualizar as seleções antes de calcular o consumo
         let potencia = tensaoSelecionada === '127V' ? potencias127V[potenciaSelecionada][estacaoSelecionada] : potencias220V[potenciaSelecionada][estacaoSelecionada];
         const tempoHoras = Math.abs(tempoSegundos) / 3600;
         const consumo = (potencia * tempoHoras) / 1000;
@@ -112,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function formatTime(seconds) {
         const hrs = Math.floor(seconds / 3600);
         const mins = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
+        const secs = Math.floor(seconds % 60); // Arredondar os segundos para baixo
         return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
@@ -291,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 document.querySelector('.totalEnergia').innerText = totalEnergia.toFixed(5) + ' kWh';
                 document.querySelector('.totalCustoEnergia').innerText = 'R$ ' + totalCustoEnergia.toFixed(2);
-                document.querySelector('.totalTempoBanho').innerText = totalTempoBanho + ' minutos';
+                document.querySelector('.totalTempoBanho').innerText = totalTempoBanho.toFixed(0) + ' minutos'; // Remover casas decimais
                 document.querySelector('.totalVazaoLitros').innerText = totalVazaoLitros.toFixed(2) + ' L';
                 document.querySelector('.totalVazaoM3').innerText = (totalVazaoLitros / 1000).toFixed(3) + ' m³';
                 document.querySelector('.totalCustoAgua').innerText = 'R$ ' + totalCustoAgua.toFixed(2);
@@ -307,44 +316,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('sample').innerText = `Tempo de banho: ${formatTime(parseFloat(penultimoBanho.tempo) * 60)}`;
                     document.getElementById('caixaResultado').style.display = 'block';
                 }
-
-                // Criar um novo banho com o próximo ID
-                return fetch('https://6727d6c8270bd0b97553b20b.mockapi.io/chuveiro', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        consumo: '0 kWh',
-                        custo: '0.00',
-                        tempo: '0.00',
-                        potencia: potenciaSelecionada,
-                        tensao: tensaoSelecionada,
-                        estacao: estacaoSelecionada,
-                        vazao: '0.00',
-                        consumoM3: '0.000'
-                    })
-                });
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Novo banho criado na API:', data);
-                const label = `Banho ${data.id} (${data.tensao}, ${data.potencia}, ${data.estacao})`;
-                graficoConsumo.data.labels.push(label);
-                graficoConsumo.data.datasets[0].data.push(0);
-                graficoCusto.data.labels.push(label);
-                graficoCusto.data.datasets[0].data.push(0);
-                graficoTempo.data.labels.push(label);
-                graficoTempo.data.datasets[0].data.push(0);
-                graficoVazao.data.labels.push(label);
-                graficoVazao.data.datasets[0].data.push(0);
-                graficoConsumo.update();
-                graficoCusto.update();
-                graficoTempo.update();
-                graficoVazao.update();
-                ultimoId = data.id; // Atualiza o último ID
-            })
-            .catch(error => console.error('Erro ao criar novo banho na API:', error));
+            .catch(error => console.error('Erro ao carregar dados da API:', error));
     }
 
     // Função para limpar todos os dados da API
@@ -446,6 +419,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para criar um novo banho
     function novoBanho() {
+        atualizarSelecoes(); // Atualizar as seleções antes de criar um novo banho
         fetch('https://6727d6c8270bd0b97553b20b.mockapi.io/chuveiro', {
             method: 'POST',
             headers: {

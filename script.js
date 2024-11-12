@@ -107,8 +107,8 @@ function calcularConsumo() {
             potencia: potenciaSelecionada,
             tensao: tensaoSelecionada,
             estacao: estacaoSelecionada,
-            vazao: vazao.toFixed(2), // Adicionar vazão
-            consumoM3: consumoM3 // Adicionar consumo em m³
+            vazao: vazao.toFixed(2),
+            consumoM3: consumoM3
         })
     })
         .then(response => response.json())
@@ -122,11 +122,11 @@ function calcularConsumo() {
             contadorBanho++;
 
             atualizarGraficos(); // Atualiza todos os gráficos
-            isCalculating = false; // Permitir novos cálculos
+            isCalculating = false;
         })
         .catch(error => {
             console.error('Erro ao enviar dados para a API:', error);
-            isCalculating = false; // Permitir novos cálculos mesmo em caso de erro
+            isCalculating = false; 
         });
 }
 
@@ -223,7 +223,7 @@ function configurarGraficos() {
     const ctxConsumo = document.getElementById('graficoConsumo').getContext('2d');
     const ctxCusto = document.getElementById('graficoCusto').getContext('2d');
     const ctxTempo = document.getElementById('graficoTempo').getContext('2d');
-    const ctxVazao = document.getElementById('graficoVazao').getContext('2d'); // Contexto do gráfico de vazão
+    const ctxVazao = document.getElementById('graficoVazao').getContext('2d');
 
     graficoConsumo = new Chart(ctxConsumo, {
         type: 'bar',
@@ -381,7 +381,7 @@ function limparDados() {
             custos = [];
             temposBanho = [];
             especificacoes = [];
-            vazoes = []; // Limpar array de vazões
+            vazoes = [];
             contadorBanho = 0;
 
             // Resetar totais
